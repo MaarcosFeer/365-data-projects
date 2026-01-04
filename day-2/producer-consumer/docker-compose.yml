@@ -1,0 +1,16 @@
+services:
+  # El que crea los archivos
+  producer:
+    build: ./producer
+    volumes:
+      - datos_compartidos:/shared_data
+
+  # El que lee los archivos
+  consumer:
+    build: ./consumer
+    volumes:
+      - datos_compartidos:/shared_data
+
+# Definimos el volumen a nivel global para que ambos lo vean
+volumes:
+  datos_compartidos:

@@ -1,0 +1,15 @@
+
+services:
+  # Servicio 1: Nuestra App Web
+  web_app:
+    build: .
+    ports:
+      - "8000:5000"  # Accederemos en localhost:8000
+    depends_on:
+      - redis_service # Espera a que la DB inicie
+
+  # Servicio 2: La Base de Datos (Imagen oficial, sin Dockerfile nuestro)
+  redis_service:
+    image: "redis:alpine"
+    # No necesitamos exponer puertos (ports) al exterior.
+    # La web_app puede hablar con él internamente en la red de Docker.
