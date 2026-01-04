@@ -76,6 +76,6 @@ Para que ambos convivan en paz, crearemos "cajas" separadas para cada uno.
 | Script | Entorno Necesario | Versión de Numpy | Comando Clave |
 | :---- | :---- | :---- | :---- |
 | ordenar.py | venv\_legacy | \~1.24.0 | pip install "numpy\<1.24.0" |
-| agent.py | venv\_moderno | 1.25+ | pip install \ "numpy\>=1.25.0 |
+| agent.py | venv\_moderno | 1.25+ | pip install "numpy>=1.25.0" |
 
 ¡Nunca instales librerías globalmente\! Usa siempre python \-m venv.
