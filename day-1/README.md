@@ -64,9 +64,8 @@ Para que ambos convivan en paz, crearemos "cajas" separadas para cada uno.
    * Windows: .\\venv\_legacy\\Scripts\\activate  
    * Mac/Linux: source venv\_legacy/bin/activate  
 4. **Instalar Numpy Antiguo:**  
-   pip install "numpy==1.19.5"
-
-   *(Nota: Si usas Python 3.12+, versiones muy viejas pueden fallar al instalar. 1.19.5 suele ser estable).*  
+   pip install "numpy<1.24.0"
+ 
 5. **Ejecutar:**  
    python ordenar.py
 
@@ -76,7 +75,7 @@ Para que ambos convivan en paz, crearemos "cajas" separadas para cada uno.
 
 | Script | Entorno Necesario | Versión de Numpy | Comando Clave |
 | :---- | :---- | :---- | :---- |
-| ordenar.py | venv\_legacy | \~1.19.0 | pip install "numpy\<1.20" |
-| agent.py | venv\_moderno | 1.25+ | pip install \--upgrade numpy |
+| ordenar.py | venv\_legacy | \~1.24.0 | pip install "numpy\<1.24.0" |
+| agent.py | venv\_moderno | 1.25+ | pip install \ "numpy\>=1.25.0 |
 
 ¡Nunca instales librerías globalmente\! Usa siempre python \-m venv.
