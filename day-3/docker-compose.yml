@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # SERVICIO 1: Nuestra API (Python/FastAPI)
+  api:
+    build: ./app
+    ports:
+      - "8000:8000"  # Puerto PC : Puerto Contenedor
+    depends_on:
+      - db  # Esperar a que la base de datos inicie antes de arrancar la API
+    environment:
+      # CONEXIÓN: postgresql://usuario:password@NOMBRE_SERVICIO_DOCKER:5432/nombre_db
+      # Nota: 'db' es el nombre del servicio de abajo 👇
+      - DATABASE_URL=postgresql://mi_usuario:mi_password@db:5432/inventario_db
+
+  # SERVICIO 2: Base de Datos (PostgreSQL)
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=mi_usuario
+      - POSTGRES_PASSWORD=mi_password
+      - POSTGRES_DB=inventario_db
+    # VOLUMEN: Para que los datos no se borren al apagar el contenedor
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+# Definición del volumen persistente
+volumes:
+  postgres_data:
