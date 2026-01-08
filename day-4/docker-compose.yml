@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # SERVICIO 1: Frontend (Streamlit)
+  # Este es el contenedor nuevo del Día 4
+  frontend:
+    build: ./frontend
+    ports:
+      - "8501:8501"  # Puerto para acceder desde el navegador
+    depends_on:
+      - api  # No inicia hasta que la API esté lista
+    restart: on-failure
+
+  # SERVICIO 2: Backend (FastAPI)
+  # Reutilizamos el código del Día 3 (carpeta 'app')
+  api:
+    build: ./app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    restart: on-failure
+    environment:
+      # Conexión a la base de datos usando el nombre del servicio 'db'
+      - DATABASE_URL=postgresql://mi_usuario:mi_password@db:5432/inventario_db
+
+  # SERVICIO 3: Base de Datos (PostgreSQL)
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=mi_usuario
+      - POSTGRES_PASSWORD=mi_password
+      - POSTGRES_DB=inventario_db
+    volumes:
+      - postgres_data_day4:/var/lib/postgresql/data
+
+# Volumen persistente para no perder los datos al apagar
+volumes:
+  postgres_data_day4:
